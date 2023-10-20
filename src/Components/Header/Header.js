@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useContext } from "react";
 import { logo, vector } from "../../Images/index"; /* Images for UI */
 import { Link } from "react-router-dom";
 import { Body } from "../Index";
@@ -6,10 +6,15 @@ import { Body } from "../Index";
 import useOnline from "../../utils/useOnline";
 import Instamart from "../Instamart";
 import { RiCloseLine, RiMenu3Line } from "react-icons/ri";
+import UserContext from "../../utils/UserContext";
 
 const Menu = () => {
   const [isLoggedIn, setIsLoggedIn] = useState("true");
   const online = useOnline();
+
+  const { user} = useContext(UserContext)
+
+  console.log(user);
 
   return (
     <>
@@ -34,7 +39,7 @@ const Menu = () => {
           style={{margin:"0 0.5rem"}}
         >
           {isLoggedIn ? (
-            <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+            <button onClick={() => setIsLoggedIn(false)}><h6 className="text-xs">{user.name}</h6>Logout</button>
           ) : (
             <button onClick={() => setIsLoggedIn(true)}>Login</button>
           )}

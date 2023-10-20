@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { filterData } from "../../utils/helper";
 import useOnline from "../../utils/useOnline";
 import {AiOutlineSearch} from "react-icons/ai"
+import { useContext } from "react";
+import UserContext from "../../utils/UserContext";
 
 
 function Body () {
@@ -45,12 +47,13 @@ console.log(json);
     }
   } 
 
-  const isOnline = useOnline();
+  const online = useOnline();
 
-  if(!isOnline){
+  if(!online){
     <h1>🔴Sorry , please check your internet connection</h1>
   }
 
+  const {user,setUser} = useContext(UserContext)
 
   return (
   (<>
@@ -77,6 +80,11 @@ console.log(json);
             <AiOutlineSearch />
           </button>
         </div>
+        <input value={user.name} onChange={(e)=>{
+          setUser({
+            name:e.target.value
+          })
+        }}/>
 
         {/* CARDS */}
       <div className="cards mx-auto sm:mx-auto sm:justify-around md:mx-auto">

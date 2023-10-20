@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 
 class ProfileClass extends React.Component {
   constructor(props) {
@@ -15,14 +16,14 @@ class ProfileClass extends React.Component {
 
   // componentDidMount will be called on initial/first render
   async componentDidMount() {
-    // API Calls
-    const userInfo = await fetch("https://api.github.com/users/RiteshLS03");
-    const json = await userInfo.json();
-    console.log(json);
-    this.setState({
-      userInfo: json,
-    });
-    console.log("Child componentDidMount" + this.props.name);
+    // // API Calls
+    // const userInfo = await fetch("https://api.github.com/users/RiteshLS03");
+    // const json = await userInfo.json();
+    // console.log(json);
+    // this.setState({
+    //   userInfo: json,
+    // });
+    // console.log("Child componentDidMount" + this.props.name);
   }
 
   // componentDidUpdate after every next render
@@ -38,12 +39,21 @@ class ProfileClass extends React.Component {
     console.log("render" + this.props.name);
     const { name, location, avatar_url } = this?.state?.userInfo;
     return (
-      <div>
-        <h1>Hey , I am class-based component</h1>
-        <h2>Name:{name}</h2>
-        <h3>Location:{location}</h3>
-        <img src={avatar_url}></img>
-      </div>
+      <>
+        <div>
+          <h1>Hey , I am class-based component</h1>
+          <h2>Name:{name}</h2>
+          <h3>Location:{location}</h3>
+          <img src={avatar_url}></img>
+        </div>
+        <UserContext.Consumer>
+          {({ user }) => 
+            <h1 className="flex justify-center font-bold">
+              {user.name}-{user.email}
+            </h1>
+          }
+        </UserContext.Consumer>
+      </>
     );
   }
 }
@@ -52,7 +62,7 @@ export default ProfileClass;
 
 /**
  *
- *   First Child Constructor 
+ *   First Child Constructor
  *   First Child Render
  *
  * API Call
