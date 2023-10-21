@@ -80,11 +80,6 @@ console.log(json);
             <AiOutlineSearch />
           </button>
         </div>
-        <input value={user.name} onChange={(e)=>{
-          setUser({
-            name:e.target.value
-          })
-        }}/>
 
         {/* CARDS */}
       <div className="cards mx-auto sm:mx-auto sm:justify-around md:mx-auto">
